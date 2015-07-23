@@ -12,7 +12,7 @@ setup(
     name='django-aerospike-sessions',
     version=__version__,
     description= "Aerospike Session Backend For Django",
-    long_description=read("README.rst"),
+    long_description=read("README.md"),
     keywords='django, sessions,',
     license='BSD',
     packages=packages,

@@ -60,7 +60,7 @@ def test_expiry():
     key = aerospike_session.session_key
     print("KEY = "+str(key))
     eq_(aerospike_session.exists(key), True)
-    time.sleep(2)
+    time.sleep(61)
     eq_(aerospike_session.exists(key), False)
 
 

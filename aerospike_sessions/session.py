@@ -62,7 +62,8 @@ class SessionStore(SessionBase):
         if must_create and meta != None:
             raise CreateError
         data = {'session_key' : self.encode(self._get_session(no_load=must_create))}
-        aerospike_client.put(key, data, meta = {'ttl': settings.SESSION_AEROSPIKE_EXPIRY})
+        ttl = self.get_expiry_age() or  settings.SESSION_AEROSPIKE_EXPIRY
+        aerospike_client.put(key, data, meta = {'ttl': ttl})
 
     def delete(self, session_key=None):
         if session_key is None:

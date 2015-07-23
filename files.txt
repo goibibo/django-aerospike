@@ -1,0 +1,7 @@
+/usr/local/lib/python2.7/dist-packages/aerospike_sessions/__init__.py
+/usr/local/lib/python2.7/dist-packages/aerospike_sessions/settings.py
+/usr/local/lib/python2.7/dist-packages/aerospike_sessions/session.py
+/usr/local/lib/python2.7/dist-packages/aerospike_sessions/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/aerospike_sessions/settings.pyc
+/usr/local/lib/python2.7/dist-packages/aerospike_sessions/session.pyc
+/usr/local/lib/python2.7/dist-packages/django_aerospike_sessions-0.5.0.egg-info

@@ -76,7 +76,7 @@ class SessionStore(SessionBase):
             pass
 
     def get_aerospike_tuple(self, session_key):
-        """Return the real key name in redis storage
+        """Get the Aerospike Tuple
         @return string
         """
         namespace = settings.SESSION_AEROSPIKE_NAMESPACE

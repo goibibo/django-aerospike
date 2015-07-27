@@ -12,11 +12,12 @@ class SessionStore(SessionBase):
     """
     Implements Aerospike database session store.
     """
+    aerospike_client = None
     def __init__(self, session_key=None):
-        aerospike_client = connection_pool.AerospikeConnectionPool().get()
         super(SessionStore, self).__init__(session_key)
 
     def load(self):
+        self.aerospike_client = connection_pool.AerospikeConnectionPool().get()
         try:
             key, meta, session_data = self.aerospike_client.get(
                 self.get_aerospike_tuple(self._get_or_create_session_key())
@@ -27,6 +28,7 @@ class SessionStore(SessionBase):
             return {}
 
     def exists(self, session_key):
+        self.aerospike_client = connection_pool.AerospikeConnectionPool().get()
         try:
             (key, meta) = self.aerospike_client.exists(self.get_aerospike_tuple(session_key))
             return meta != None
@@ -34,6 +36,7 @@ class SessionStore(SessionBase):
             return False
 
     def create(self):
+        self.aerospike_client = connection_pool.AerospikeConnectionPool().get()
         while True:
             self._session_key = self._get_new_session_key()
 
@@ -46,6 +49,7 @@ class SessionStore(SessionBase):
             return
 
     def save(self, must_create=False):
+        self.aerospike_client = connection_pool.AerospikeConnectionPool().get()
         if self.session_key is None:
             return self.create()
         key, meta = self.aerospike_client.exists(self.get_aerospike_tuple(self._get_or_create_session_key()))
@@ -56,6 +60,7 @@ class SessionStore(SessionBase):
         self.aerospike_client.put(key, data, meta = {'ttl': ttl})
 
     def delete(self, session_key=None):
+        self.aerospike_client = connection_pool.AerospikeConnectionPool().get()
         if session_key is None:
             if self.session_key is None:
                 return

@@ -52,6 +52,7 @@ def test_items():
 
 def test_expiry():
     # from nose.tools import set_trace; set_trace()
+    # Note : expiry in minutes
     aerospike_session.set_expiry(1)
     # Test if the expiry age is set correctly
     eq_(aerospike_session.get_expiry_age(), 1)

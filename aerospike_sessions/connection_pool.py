@@ -7,9 +7,8 @@ config = {
     ],
     "policies": settings.SESSION_AEROSPIKE_POLICY
 }
-log = logging.getLogger("kafka")
+log = logging.getLogger("aerospike")
 
-aerospike_client = aerospike.client(config).connect(settings.SESSION_AEROSPIKE_USER_NAME, settings.SESSION_AEROSPIKE_PASSWORD)
 class AerospikeConnectionPool():
     aerospike_connections = []
     def __init__(self):

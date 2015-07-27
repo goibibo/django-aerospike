@@ -13,7 +13,7 @@ class SessionStore(SessionBase):
     Implements Aerospike database session store.
     """
     def __init__(self, session_key=None):
-        aerospike_client = connection_pool.get()
+        aerospike_client = connection_pool.AerospikeConnectionPool().get()
         super(SessionStore, self).__init__(session_key)
 
     def load(self):

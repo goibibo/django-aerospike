@@ -12,6 +12,7 @@ aerospike_session = SessionStore()
 
 
 def test_modify_and_keys():
+    # from nose.tools import set_trace; set_trace()
     eq_(aerospike_session.modified, False)
     aerospike_session['test'] = 'test_me'
     eq_(aerospike_session.modified, True)
@@ -28,6 +29,7 @@ def test_session_load_does_not_create_record():
 
 
 def test_save_and_delete():
+    # from nose.tools import set_trace; set_trace()
     aerospike_session['key'] = 'value'
     aerospike_session.save()
     eq_(aerospike_session.exists(aerospike_session.session_key), True)
@@ -36,6 +38,7 @@ def test_save_and_delete():
 
 
 def test_flush():
+    # from nose.tools import set_trace; set_trace()
     aerospike_session['key'] = 'another_value'
     aerospike_session.save()
     key = aerospike_session.session_key
@@ -44,6 +47,7 @@ def test_flush():
 
 
 def test_items():
+    # from nose.tools import set_trace; set_trace()
     aerospike_session['item1'], aerospike_session['item2'] = 1, 2
     aerospike_session.save()
     # Python 3.*

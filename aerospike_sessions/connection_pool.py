@@ -18,10 +18,8 @@ class AerospikeConnectionPool():
                 self.aerospike_connections.append\
                     (aerospike.client(config).connect(settings.SESSION_AEROSPIKE_USER_NAME,
                                                   settings.SESSION_AEROSPIKE_PASSWORD))
-        print "INIT "+ str(len(self.aerospike_connections))
 
     def get(self):
-        print "GET "+ str(len(self.aerospike_connections))
         try:
             return self.aerospike_connections.pop()
         except Exception, e:
@@ -30,4 +28,3 @@ class AerospikeConnectionPool():
 
     def put(self, conn):
         self.aerospike_connections.append(conn)
-        print "PUT "+ str(len(self.aerospike_connections))

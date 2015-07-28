@@ -8,8 +8,8 @@ from nose.tools import eq_, assert_false
 import aerospike
 import timeit
 
-aerospike_session = SessionStore()
 
+aerospike_session = SessionStore()
 
 def test_modify_and_keys():
     # from nose.tools import set_trace; set_trace()
@@ -18,14 +18,11 @@ def test_modify_and_keys():
     eq_(aerospike_session.modified, True)
     eq_(aerospike_session['test'], 'test_me')
 
-
-
 def test_session_load_does_not_create_record():
     # from nose.tools import set_trace; set_trace()
     session = SessionStore('someunknownkey')
     session.load()
-    eq_(aerospike_session.exists(aerospike_session.session_key), False)
-
+    eq_(session.exists(session.session_key), False)
 
 
 def test_save_and_delete():
@@ -63,7 +60,6 @@ def test_expiry():
     aerospike_session['key'] = 'expiring_value'
     aerospike_session.save()
     key = aerospike_session.session_key
-    print("KEY = "+str(key))
     eq_(aerospike_session.exists(key), True)
     time.sleep(61)
     eq_(aerospike_session.exists(key), False)
@@ -75,7 +71,6 @@ def test_save_and_load():
     aerospike_session.setdefault('item_test', 8)
     aerospike_session.save()
     session_data = aerospike_session.load()
-    print("SESSION DATA = "+str(session_data))
     eq_(session_data.get('item_test'), 8)
 
 

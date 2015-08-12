@@ -2,9 +2,7 @@ import logging
 from aerospike_sessions import settings
 import aerospike
 config = {
-    "hosts": [
-        ( settings.SESSION_AEROSPIKE_HOST, settings.SESSION_AEROSPIKE_PORT)
-    ],
+    "hosts": settings.SESSION_AEROSPIKE_HOSTS_CONFIG,
     "policies": settings.SESSION_AEROSPIKE_POLICY
 }
 log = logging.getLogger("aerospike")

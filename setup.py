@@ -1,6 +1,6 @@
 from setuptools import setup
 import os
-from redis_sessions import __version__
+from aerospike_sessions import __version__
 
 def read(filename):
     return open(os.path.join(os.path.dirname(__file__), filename)).read()

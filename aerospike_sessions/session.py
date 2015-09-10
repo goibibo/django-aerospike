@@ -19,16 +19,16 @@ class SessionStore(SessionBase):
     """
 
     def __init__(self, session_key=None):
-        self._servers = self.server.split(',') if type(self.server)==str else self.server
-        host_port_list = []
-        for server in self._servers:
-            if ':' in server:
-                host, port = server.rsplit(':', 1)
-                try:
-                    port = int(port)
-                    host_port_list.append((host, port))
-                except (ValueError, TypeError):
-                    raise ImproperlyConfigured("port value must be an integer")
+        # self._servers = self.server.split(',') if type(self.server)==str else self.server
+        host_port_list = self.server
+        # for server in self._servers:
+        #     if ':' in server:
+        #         host, port = server.rsplit(':', 1)
+        #         try:
+        #             port = int(port)
+        #             host_port_list.append((host, port))
+        #         except (ValueError, TypeError):
+        #             raise ImproperlyConfigured("port value must be an integer")
 
         if not host_port_list:
             host, port = None, None

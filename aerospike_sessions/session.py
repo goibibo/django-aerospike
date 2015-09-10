@@ -19,7 +19,7 @@ class SessionStore(SessionBase):
     """
 
     def __init__(self, session_key=None):
-        self._servers = self.server.split(',')
+        self._servers = self.server.split(',') if type(self.server)==str else self.server
         host_port_list = []
         for server in self._servers:
             if ':' in server:

@@ -16,7 +16,7 @@
 3. Optional settings:
 
     ``
-    SESSION_AEROSPIKE_HOST = 'localhost'
-    SESSION_AEROSPIKE_PORT = 6379
+    SESSION_AEROSPIKE_HOST = 'aa.bb.cc.dd'
+    SESSION_AEROSPIKE_PORT = 3000
     ``
 

@@ -23,7 +23,7 @@ class SessionStore(SessionBase):
         host_port_list = []
         for server in self._servers:
             if ':' in server:
-                host, port = self.server.rsplit(':', 1)
+                host, port = server.rsplit(':', 1)
                 try:
                     port = int(port)
                     host_port_list.append((host, port))

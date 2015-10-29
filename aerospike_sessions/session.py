@@ -1,3 +1,4 @@
+import threading
 try:
     import aerospike
 except ImportError:
@@ -14,14 +15,20 @@ from django.contrib.sessions.backends.base import SessionBase, CreateError
 from aerospike_sessions import settings, pool
 the_pool = None
 
+lock = threading.Lock()
+
 def handleconnection(f):
     def decorated_func(*args, **kwargs):
-        if not args[0].conn :
+        if not args[0].conn:
             args[0].conn = args[0].pool.get()
-            x = f(*args, **kwargs)
-            args[0].pool.put(args[0].conn)
-            args[0].conn = None
-            return x
+            try:
+                x = f(*args, **kwargs)
+                return x
+            except Exception,e:
+                raise e
+            finally:
+                args[0].pool.put(args[0].conn)
+                args[0].conn = None
         else :
             return f(*args, **kwargs)
     return decorated_func
@@ -33,8 +40,9 @@ class SessionStore(SessionBase):
 
     def __init__(self, session_key=None):
         global the_pool
-        if the_pool is None:
-            the_pool = pool.AerospikeConnectionPool()
+        with lock:
+            if the_pool is None:
+                the_pool = pool.AerospikeConnectionPool()
         self.pool = the_pool
         self.conn = None
         super(SessionStore, self).__init__(session_key)

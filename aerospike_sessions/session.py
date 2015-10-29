@@ -13,9 +13,18 @@ except ImportError:  # Python 3.*
 from django.contrib.sessions.backends.base import SessionBase, CreateError
 
 from aerospike_sessions import settings, pool
-the_pool = None
+tls = threading.local()
+
 
 lock = threading.Lock()
+
+def handleconnection_withoutpool(f):
+    """
+    dummy if not using pool
+    """
+    def decorated_func(*args, **kwargs):
+        return f(*args, **kwargs)
+    return decorated_func
 
 def handleconnection(f):
     def decorated_func(*args, **kwargs):
@@ -24,7 +33,7 @@ def handleconnection(f):
             try:
                 x = f(*args, **kwargs)
                 return x
-            except Exception,e:
+            except Exception, e:
                 raise e
             finally:
                 args[0].pool.put(args[0].conn)
@@ -32,6 +41,7 @@ def handleconnection(f):
         else :
             return f(*args, **kwargs)
     return decorated_func
+
 
 class SessionStore(SessionBase):
     """
@@ -41,9 +51,16 @@ class SessionStore(SessionBase):
     def __init__(self, session_key=None):
         global the_pool
         with lock:
+            the_pool = getattr(tls, 'the_pool', None)
             if the_pool is None:
-                the_pool = pool.AerospikeConnectionPool()
-        self.pool = the_pool
+                tls.the_pool = pool.AerospikeConnectionPool()
+                """
+                tls.the_pool = aerospike.client(settings.config).connect(
+                                                            settings.SESSION_AEROSPIKE_USER_NAME,
+                                                            settings.SESSION_AEROSPIKE_PASSWORD
+                                                        )
+                """
+        self.pool = tls.the_pool
         self.conn = None
         super(SessionStore, self).__init__(session_key)
 

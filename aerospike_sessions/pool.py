@@ -2,10 +2,6 @@ import logging
 import threading
 from aerospike_sessions import settings
 import aerospike
-config = {
-    "hosts": settings.SESSION_AEROSPIKE_HOSTS_CONFIG,
-    "policies": settings.SESSION_AEROSPIKE_POLICY
-}
 log = logging.getLogger("aerospike")
 
 tls = threading.local()
@@ -21,10 +17,11 @@ class AerospikeConnectionPool():
         with init_lock:
             aerospike_connections = getattr(tls, 'aerospike_connections', None)
             if aerospike_connections is None:
+                #print "creating connection!"
                 tls.aerospike_connections = []
                 for i in xrange(settings.SESSION_MAX_CONNECTIONS):
                     tls.aerospike_connections.append\
-                        (aerospike.client(config).connect(settings.SESSION_AEROSPIKE_USER_NAME,
+                        (aerospike.client(settings.config).connect(settings.SESSION_AEROSPIKE_USER_NAME,
                                                       settings.SESSION_AEROSPIKE_PASSWORD))
                 created = 1
         return created

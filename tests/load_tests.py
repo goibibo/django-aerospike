@@ -6,11 +6,19 @@ import time, os
 import threading
 
 def mak_request(aerospike_session):
-    print "making request"
-    aerospike_session.setdefault('item_test', 8)
-    aerospike_session.save()
-    session_data = aerospike_session.load()
-    res = session_data.get('item_test') == 8
+    res = 0
+    t_tot = 0
+    times = 10
+    for i in range(times):
+        t1 = time.time()
+        aerospike_session.setdefault('item_test', 8)
+        aerospike_session.save()
+        session_data = aerospike_session.load()
+        res = session_data.get('item_test') == 8
+        t_diff = time.time() - t1
+        t_tot += t_diff
+
+    print "request res %d per_re %f"%(res,t_tot/times)
     return res
 
 def make_conns(id, reqs):

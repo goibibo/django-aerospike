@@ -1,6 +1,6 @@
 from django.conf import settings
 # Uncomment for load test
-# settings.configure()
+#settings.configure()
 #SESSION_AEROSPIKE_POLICY = getattr(settings, 'SESSION_AEROSPIKE_POLICY', {})
 SESSION_AEROSPIKE_POLICY= {
         'timeout' : 30000 # milliseconds
@@ -14,3 +14,5 @@ SESSION_AEROSPIKE_SET = getattr(settings, 'SESSION_AEROSPIKE_SET', 'django_aeros
 SESSION_AEROSPIKE_HOSTS_CONFIG = [('10.70.213.30', 3000), ('10.70.213.31', 3000), ('10.70.213.32', 3000)]
 SESSION_AEROSPIKE_BIN = getattr(settings, 'SESSION_AEROSPIKE_BIN', 'session_key')
 SESSION_MAX_CONNECTIONS = getattr(settings, 'SESSION_MAX_CONNECTIONS', 1)
+
+config = {"hosts": SESSION_AEROSPIKE_HOSTS_CONFIG, "policies":SESSION_AEROSPIKE_POLICY}

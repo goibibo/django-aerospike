@@ -13,7 +13,8 @@ except ImportError:  # Python 3.*
 from django.contrib.sessions.backends.base import SessionBase, CreateError
 
 from aerospike_sessions import settings, pool
-the_pool = None
+the_pool =  pool.AerospikeConnectionPool()
+the_conn = the_pool.get()
 
 lock = threading.Lock()
 
@@ -39,12 +40,7 @@ class SessionStore(SessionBase):
     """
 
     def __init__(self, session_key=None):
-        global the_pool
-        with lock:
-            if the_pool is None:
-                the_pool = pool.AerospikeConnectionPool()
-        self.pool = the_pool
-        self.conn = None
+        self.conn = the_conn
         super(SessionStore, self).__init__(session_key)
 
     @property
@@ -89,7 +85,7 @@ class SessionStore(SessionBase):
     def aero_bin(self):
         return settings.SESSION_AEROSPIKE_BIN
 
-    @handleconnection
+
     def load(self):
         try:
             key, meta, session_data = self.conn.get(
@@ -100,7 +96,7 @@ class SessionStore(SessionBase):
             self._session_key = None
             return {}
 
-    @handleconnection
+
     def exists(self, session_key):
         try:
             (key, meta) = self.conn.exists(self.get_aerospike_tuple(session_key))
@@ -108,7 +104,6 @@ class SessionStore(SessionBase):
         except Exception,e:
             return False
 
-    @handleconnection
     def create(self):
         while True:
             self._session_key = self._get_new_session_key()

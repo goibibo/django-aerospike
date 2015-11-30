@@ -1,6 +1,6 @@
 from django.conf import settings
 # Uncomment for load test
-#settings.configure()
+settings.configure()
 #SESSION_AEROSPIKE_POLICY = getattr(settings, 'SESSION_AEROSPIKE_POLICY', {})
 SESSION_AEROSPIKE_POLICY= {
         'timeout' : 30000 # milliseconds

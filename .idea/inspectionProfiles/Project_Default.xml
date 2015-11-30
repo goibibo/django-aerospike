@@ -1,0 +1,88 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0" is_locked="false">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="72">
+            <item index="0" class="java.lang.String" itemvalue="simplejson" />
+            <item index="1" class="java.lang.String" itemvalue="django-extensions" />
+            <item index="2" class="java.lang.String" itemvalue="gunicorn" />
+            <item index="3" class="java.lang.String" itemvalue="virtualenv" />
+            <item index="4" class="java.lang.String" itemvalue="pss" />
+            <item index="5" class="java.lang.String" itemvalue="progressbar" />
+            <item index="6" class="java.lang.String" itemvalue="docutils" />
+            <item index="7" class="java.lang.String" itemvalue="gdata" />
+            <item index="8" class="java.lang.String" itemvalue="slugify" />
+            <item index="9" class="java.lang.String" itemvalue="suds" />
+            <item index="10" class="java.lang.String" itemvalue="requests" />
+            <item index="11" class="java.lang.String" itemvalue="html5lib" />
+            <item index="12" class="java.lang.String" itemvalue="pybloom" />
+            <item index="13" class="java.lang.String" itemvalue="starbase" />
+            <item index="14" class="java.lang.String" itemvalue="django-image-cropping" />
+            <item index="15" class="java.lang.String" itemvalue="django-multiselectfield" />
+            <item index="16" class="java.lang.String" itemvalue="PyXML" />
+            <item index="17" class="java.lang.String" itemvalue="django-nose" />
+            <item index="18" class="java.lang.String" itemvalue="nexus" />
+            <item index="19" class="java.lang.String" itemvalue="httplib2" />
+            <item index="20" class="java.lang.String" itemvalue="MySQL-python" />
+            <item index="21" class="java.lang.String" itemvalue="ClientCookie" />
+            <item index="22" class="java.lang.String" itemvalue="pytz" />
+            <item index="23" class="java.lang.String" itemvalue="ipdb" />
+            <item index="24" class="java.lang.String" itemvalue="uWSGI" />
+            <item index="25" class="java.lang.String" itemvalue="amqp" />
+            <item index="26" class="java.lang.String" itemvalue="elementtree" />
+            <item index="27" class="java.lang.String" itemvalue="django-treebeard" />
+            <item index="28" class="java.lang.String" itemvalue="django-jsonfield" />
+            <item index="29" class="java.lang.String" itemvalue="easy-thumbnails" />
+            <item index="30" class="java.lang.String" itemvalue="django-debug-toolbar" />
+            <item index="31" class="java.lang.String" itemvalue="gargoyle" />
+            <item index="32" class="java.lang.String" itemvalue="thrift" />
+            <item index="33" class="java.lang.String" itemvalue="django-modeldict" />
+            <item index="34" class="java.lang.String" itemvalue="reportlab" />
+            <item index="35" class="java.lang.String" itemvalue="billiard" />
+            <item index="36" class="java.lang.String" itemvalue="ipython" />
+            <item index="37" class="java.lang.String" itemvalue="xmltodict" />
+            <item index="38" class="java.lang.String" itemvalue="django-piston" />
+            <item index="39" class="java.lang.String" itemvalue="djangobulk" />
+            <item index="40" class="java.lang.String" itemvalue="uTidylib" />
+            <item index="41" class="java.lang.String" itemvalue="six" />
+            <item index="42" class="java.lang.String" itemvalue="pymongo" />
+            <item index="43" class="java.lang.String" itemvalue="pybloomfiltermmap" />
+            <item index="44" class="java.lang.String" itemvalue="kombu" />
+            <item index="45" class="java.lang.String" itemvalue="distribute" />
+            <item index="46" class="java.lang.String" itemvalue="greenlet" />
+            <item index="47" class="java.lang.String" itemvalue="python-memcached" />
+            <item index="48" class="java.lang.String" itemvalue="gevent" />
+            <item index="49" class="java.lang.String" itemvalue="pytidylib" />
+            <item index="50" class="java.lang.String" itemvalue="celery" />
+            <item index="51" class="java.lang.String" itemvalue="pisa" />
+            <item index="52" class="java.lang.String" itemvalue="stevedore" />
+            <item index="53" class="java.lang.String" itemvalue="PIL" />
+            <item index="54" class="java.lang.String" itemvalue="googlemaps" />
+            <item index="55" class="java.lang.String" itemvalue="lxml" />
+            <item index="56" class="java.lang.String" itemvalue="redis" />
+            <item index="57" class="java.lang.String" itemvalue="github-cli" />
+            <item index="58" class="java.lang.String" itemvalue="mock" />
+            <item index="59" class="java.lang.String" itemvalue="django-experiments" />
+            <item index="60" class="java.lang.String" itemvalue="virtualenv-clone" />
+            <item index="61" class="java.lang.String" itemvalue="ipaddr" />
+            <item index="62" class="java.lang.String" itemvalue="happybase" />
+            <item index="63" class="java.lang.String" itemvalue="statsd" />
+            <item index="64" class="java.lang.String" itemvalue="wstools" />
+            <item index="65" class="java.lang.String" itemvalue="num2words" />
+            <item index="66" class="java.lang.String" itemvalue="virtualenvwrapper" />
+            <item index="67" class="java.lang.String" itemvalue="jsonfield" />
+            <item index="68" class="java.lang.String" itemvalue="nose" />
+            <item index="69" class="java.lang.String" itemvalue="python-Levenshtein" />
+            <item index="70" class="java.lang.String" itemvalue="django-geoip" />
+            <item index="71" class="java.lang.String" itemvalue="protobuf" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="ERROR" enabled_by_default="true" />
+  </profile>
+</component>

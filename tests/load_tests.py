@@ -31,10 +31,11 @@ def make_conns(id, reqs):
 
 if __name__ == "__main__":
 
-    for i in range(2):
-        thread = threading.Thread(target=make_conns, args=[i,2] )
+    for i in range(20):
+        thread = threading.Thread(target=make_conns, args=[i,5] )
         thread.start()
 
     while True:
         os.system('netstat -an  | grep 3000  | wc -l')
         time.sleep(1)
+

@@ -13,12 +13,12 @@ except ImportError:  # Python 3.*
 from django.contrib.sessions.backends.base import SessionBase, CreateError
 
 from aerospike_sessions import settings, pool
-tls = threading.local()
-
+#tls = threading.local()
+the_pool =None
 
 lock = threading.Lock()
 
-def handleconnection_withoutpool(f):
+def handleconnection(f):
     """
     dummy if not using pool
     """
@@ -26,7 +26,11 @@ def handleconnection_withoutpool(f):
         return f(*args, **kwargs)
     return decorated_func
 
-def handleconnection(f):
+def handleconnection_withpool(f):
+    """
+    uses pool, has dependencies with init.
+    pls use carefully!
+    """
     def decorated_func(*args, **kwargs):
         if not args[0].conn:
             args[0].conn = args[0].pool.get()
@@ -51,18 +55,28 @@ class SessionStore(SessionBase):
     def __init__(self, session_key=None):
         global the_pool
         with lock:
-            the_pool = getattr(tls, 'the_pool', None)
+            #the_pool = getattr(tls, 'the_pool', None)
             if the_pool is None:
-                tls.the_pool = pool.AerospikeConnectionPool()
-                """
-                tls.the_pool = aerospike.client(settings.config).connect(
+                #tls.the_pool = pool.AerospikeConnectionPool()
+
+                #tls.
+                the_pool = aerospike.client(settings.config).connect(
                                                             settings.SESSION_AEROSPIKE_USER_NAME,
                                                             settings.SESSION_AEROSPIKE_PASSWORD
                                                         )
-                """
-        self.pool = tls.the_pool
-        self.conn = None
+
+        # Uncomment both below and comment following to use a pool
+        #self.pool = tls.the_pool
+        #self.conn = None
+        self.conn = the_pool
         super(SessionStore, self).__init__(session_key)
+
+
+    """
+    def __del__(self):
+        self.conn.close()
+
+    """
 
     @property
     def server(self):

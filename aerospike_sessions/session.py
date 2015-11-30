@@ -16,23 +16,6 @@ from aerospike_sessions import settings, pool
 the_pool =  pool.AerospikeConnectionPool()
 the_conn = the_pool.get()
 
-lock = threading.Lock()
-
-def handleconnection(f):
-    def decorated_func(*args, **kwargs):
-        if not args[0].conn:
-            args[0].conn = args[0].pool.get()
-            try:
-                x = f(*args, **kwargs)
-                return x
-            except Exception,e:
-                raise e
-            finally:
-                args[0].pool.put(args[0].conn)
-                args[0].conn = None
-        else :
-            return f(*args, **kwargs)
-    return decorated_func
 
 class SessionStore(SessionBase):
     """
@@ -115,7 +98,7 @@ class SessionStore(SessionBase):
             self.modified = True
             return
 
-    @handleconnection
+
     def save(self, must_create=False):
         if self.session_key is None:
             return self.create()
@@ -126,7 +109,7 @@ class SessionStore(SessionBase):
         ttl = self.get_expiry_age() or  self.meta['ttl']
         self.conn.put(key, data, meta = {'ttl': ttl})
 
-    @handleconnection
+
     def delete(self, session_key=None):
         if session_key is None:
             if self.session_key is None:
